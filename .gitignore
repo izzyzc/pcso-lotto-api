@@ -1,0 +1,23 @@
+# Node.js dependencies
+node_modules/
+
+# Vercel/Build files
+.vercel/
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+
+# Don't ignore data folder — we need it for lotto results
+# (Make sure there’s no `data/` line here!)
