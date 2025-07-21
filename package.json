@@ -1,0 +1,9 @@
+{
+  "name": "pcso-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "scrape": "node scripts/scraper.js"
+  },
+  "dependencies": {}
+}
