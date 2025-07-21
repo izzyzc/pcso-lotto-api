@@ -1,0 +1,32 @@
+name: Daily Scraper
+
+on:
+  schedule:
+    - cron: '15 13 * * *'  # Runs 9:15 PM PH Time daily (PH = UTC+8)
+  workflow_dispatch:       # Allows manual run
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install axios cheerio
+
+      - name: Run scraper
+        run: node scripts/scraper.js
+
+      - name: Commit and push data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git commit -m "🔄 Update lotto data [auto]" || echo "No changes"
+          git push
