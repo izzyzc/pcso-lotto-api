@@ -5,6 +5,9 @@ on:
     - cron: '15 13 * * *'  # Runs 9:15 PM PH Time daily (PH = UTC+8)
   workflow_dispatch:       # Allows manual run
 
+permissions:
+  contents: write  # 👈 IMPORTANT: allow git push
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
