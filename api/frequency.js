@@ -43,14 +43,23 @@ export default async function handler(req, res) {
 
     freqArray.sort((a, b) => b.count - a.count);
 
-    const top = limit ? freqArray.slice(0, parseInt(limit)) : freqArray;
-    const bottom = limit ? freqArray.slice(-parseInt(limit)) : freqArray;
+    let mostFrequent, leastFrequent;
+
+    if (limit) {
+      const n = parseInt(limit);
+      mostFrequent = freqArray.slice(0, n);
+      leastFrequent = freqArray.slice(-n);
+    } else {
+      mostFrequent = freqArray.slice(0, 10);   // default top 10
+      leastFrequent = freqArray.slice(-10);    // default bottom 10
+    }
 
     return res.status(200).json({
       game,
       draws: results.length,
-      mostFrequent: top,
-      leastFrequent: bottom,
+      mostFrequent,
+      leastFrequent,
+      allFrequencies: freqArray // full list if needed
     });
   } catch (err) {
     console.error("Frequency error:", err.message);
