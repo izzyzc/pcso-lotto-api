@@ -21,7 +21,19 @@ function formatDate(date) {
   return date.toISOString().split("T")[0];
 }
 
-// Build URL for scraping
+// Map game name for fallback URL
+function mapGameToFallbackUrl(game) {
+  switch (game) {
+    case "Ultra Lotto 6/58": return "6-58";
+    case "Grand Lotto 6/55": return "6-55";
+    case "Super Lotto 6/49": return "6-49";
+    case "Mega Lotto 6/45": return "6-45";
+    case "Lotto 6/42": return "6-42";
+    default: throw new Error("Unknown game: " + game);
+  }
+}
+
+// Build primary URL
 function buildUrl(game, dateObj) {
   const month = dateObj.toLocaleString("en-US", { month: "long" }).toLowerCase();
   const day = dateObj.getDate();
@@ -30,51 +42,54 @@ function buildUrl(game, dateObj) {
   return `${BASE_URL}/${formattedGame}-results-for-${month}-${day}-${year}/`;
 }
 
+// Build fallback URL
+function buildFallbackUrl(game, dateObj) {
+  const month = dateObj.toLocaleString("en-US", { month: "long" }).toLowerCase();
+  const day = dateObj.getDate();
+  const year = dateObj.getFullYear();
+  const fallbackGame = mapGameToFallbackUrl(game);
+  return `${BASE_URL}/${fallbackGame}-lotto-result-${month}-${day}-${year}/`;
+}
+
 // Scrape one page
-async function scrapeResult(game, dateObj) {
-  const url = buildUrl(game, dateObj);
-  try {
-    const res = await axios.get(url);
-    const $ = cheerio.load(res.data);
+async function scrapeResult(game, dateObj, url) {
+  const res = await axios.get(url);
+  const $ = cheerio.load(res.data);
 
-    let numbers = [];
-    let jackpot = "N/A";
-    let winners = "0";
+  let numbers = [];
+  let jackpot = "N/A";
+  let winners = "0";
 
-    // 👉 Only get FIRST "Jackpot Prize" table
-    const table = $("div.post_content table").first();
-    table.find("tbody tr").each((_, row) => {
-      const cells = $(row).find("td");
-      if (cells.length >= 2) {
-        const label = $(cells[0]).text().toLowerCase();
-        if (label.includes("winning combination")) {
-          numbers = $(cells[1]).text().split("-").map(n => n.trim()).filter(Boolean);
-        } else if (label.includes("jackpot prize") && jackpot === "N/A") {
-          jackpot = $(cells[1]).text().trim();
-        } else if (label.includes("number of winner")) {
-          winners = $(cells[1]).text().trim();
-        }
+  // 👉 Only get FIRST "Jackpot Prize" table
+  const table = $("div.post_content table").first();
+  table.find("tbody tr").each((_, row) => {
+    const cells = $(row).find("td");
+    if (cells.length >= 2) {
+      const label = $(cells[0]).text().toLowerCase();
+      if (label.includes("winning combination")) {
+        numbers = $(cells[1]).text().split("-").map(n => n.trim()).filter(Boolean);
+      } else if (label.includes("jackpot prize") && jackpot === "N/A") {
+        jackpot = $(cells[1]).text().trim();
+      } else if (label.includes("number of winner")) {
+        winners = $(cells[1]).text().trim();
       }
-    });
+    }
+  });
 
-    return {
-      date: formatDate(dateObj),
-      numbers,
-      jackpot,
-      winners,
-      source: url,
-    };
-  } catch (err) {
-    console.error(`❌ Failed to scrape ${game} on ${formatDate(dateObj)}: ${err.message}`);
-    return null;
-  }
+  return {
+    date: formatDate(dateObj),
+    numbers,
+    jackpot,
+    winners,
+    source: url,
+  };
 }
 
 // Update all game JSONs
 async function updateAllGames() {
   const today = new Date();
 
-  for (const [game, fileName] of Object.entries(GAMES)) {
+  for (const [game, fileName] of Object.entries(GAME_FILES)) {
     const filePath = path.join(DATA_DIR, fileName);
 
     // Load existing file or create new
@@ -90,8 +105,21 @@ async function updateAllGames() {
       continue;
     }
 
-    // Scrape and append
-    const result = await scrapeResult(game, today);
+    // Try primary URL
+    let result = null;
+    try {
+      const url = buildUrl(game, today);
+      result = await scrapeResult(game, today, url);
+    } catch (err) {
+      console.warn(`⚠️ Primary failed for ${game}, trying fallback...`);
+      try {
+        const url = buildFallbackUrl(game, today);
+        result = await scrapeResult(game, today, url);
+      } catch (fallbackErr) {
+        console.error(`❌ Both primary and fallback failed for ${game}: ${fallbackErr.message}`);
+      }
+    }
+
     if (result && result.numbers.length > 0) {
       results.unshift(result); // add to top
       fs.writeFileSync(filePath, JSON.stringify(results, null, 2));
