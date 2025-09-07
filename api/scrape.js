@@ -41,7 +41,7 @@ export default async function handler(req, res) {
           const label = $(cells[0]).text().toLowerCase();
           if (label.includes("winning combination")) {
             numbers = $(cells[1]).text().split("-").map(n => n.trim()).filter(Boolean);
-          } else if (label.includes("p:contains(latest jackpot prize) ~ figure.wp-block-table table")) {
+          } else if (label.includes("jackpot prize")) {
             jackpot = $(cells[1]).text().trim();
           } else if (label.includes("number of winner")) {
             winners = $(cells[1]).text().trim();
