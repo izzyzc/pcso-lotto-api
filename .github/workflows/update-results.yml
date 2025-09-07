@@ -1,0 +1,32 @@
+name: Update Lotto Results
+
+on:
+  schedule:
+    - cron: "30 13 * * *" # Runs daily at 9:30 PM PH time (draw time)
+  workflow_dispatch: # Allow manual trigger too
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install axios cheerio
+
+      - name: Run update script
+        run: node scripts/update-results.js
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add data/*.json
+          git commit -m "Update lotto results" || echo "No changes to commit"
+          git push
