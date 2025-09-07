@@ -125,6 +125,6 @@ async function fetchHistoryForYear(year) {
 }
 
 // Run for 2022 first
-fetchHistoryForYear(2024).then(() => {
+fetchHistoryForYear(2025).then(() => {
   console.log("🎉 Done fetching 2022 draws!");
 });
