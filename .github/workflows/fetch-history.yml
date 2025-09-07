@@ -1,0 +1,32 @@
+name: Fetch Lotto History
+
+on:
+  workflow_dispatch:   # 👈 allows manual trigger from GitHub Actions tab
+
+jobs:
+  fetch-history:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          npm install axios cheerio
+
+      - name: Run history scraper
+        run: node scripts/fetch-history.js
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/*.json
+          git commit -m "Add historical lotto results"
+          git push
