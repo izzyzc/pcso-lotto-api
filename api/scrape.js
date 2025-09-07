@@ -1,4 +1,4 @@
-// api/scrape.js (for Vercel)
+// api/scrape.js
 import axios from "axios";
 import * as cheerio from "cheerio";
 
@@ -18,12 +18,24 @@ function mapGameToFallbackUrl(game) {
 export default async function handler(req, res) {
   try {
     const { game, date } = req.query; // date = yyyy-mm-dd
+    if (!game || !date) {
+      return res.status(400).json({ error: "Missing 'game' or 'date' query param" });
+    }
+
     const localDate = new Date(date);
+    if (isNaN(localDate.getTime())) {
+      return res.status(400).json({ error: "Invalid 'date' (expected yyyy-mm-dd)" });
+    }
+
     const month = localDate.toLocaleString("en-US", { month: "long" }).toLowerCase();
     const day = localDate.getDate();
     const year = localDate.getFullYear();
 
-    const formattedGame = game.replace(/\s+/g, "-").replace("/", "-").toLowerCase();
+    const formattedGame = game
+      .replace(/\s+/g, "-")
+      .replace(/\//g, "-")
+      .toLowerCase();
+
     let url = `${BASE_URL}/${formattedGame}-results-for-${month}-${day}-${year}/`;
 
     let numbers = [];
@@ -31,20 +43,41 @@ export default async function handler(req, res) {
     let winners = "0";
 
     async function scrapePage(scrapeUrl) {
-      const response = await axios.get(scrapeUrl);
+      const response = await axios.get(scrapeUrl, {
+        headers: {
+          // Helps avoid occasional bot blocks
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36",
+        },
+      });
       const $ = cheerio.load(response.data);
 
-      const rows = $("div.post_content table tbody tr");
+      // ✅ Pick the FIRST table that contains "Winning Combination" (the actual results table)
+      const resultsTable = $("div.post_content table")
+        .filter((_, el) => $(el).text().toLowerCase().includes("winning combination"))
+        .first();
+
+      // Fallback: if not found, try the very first table under post_content
+      const tableToUse = resultsTable.length ? resultsTable : $("div.post_content table").first();
+
+      if (!tableToUse || !tableToUse.length) {
+        return; // leave defaults
+      }
+
+      const rows = tableToUse.find("tbody tr");
       rows.each((_, row) => {
         const cells = $(row).find("td");
         if (cells.length >= 2) {
           const label = $(cells[0]).text().toLowerCase();
+          const value = $(cells[1]).text().trim();
+
           if (label.includes("winning combination")) {
-            numbers = $(cells[1]).text().split("-").map(n => n.trim()).filter(Boolean);
+            numbers = value.split("-").map((n) => n.trim()).filter(Boolean);
           } else if (label.includes("jackpot prize")) {
-            jackpot = $(cells[1]).text().trim();
+            // This will be the jackpot from the correct (results) table
+            jackpot = value;
           } else if (label.includes("number of winner")) {
-            winners = $(cells[1]).text().trim();
+            winners = value;
           }
         }
       });
@@ -68,7 +101,7 @@ export default async function handler(req, res) {
       source: url,
     });
   } catch (err) {
-    console.error("Scraper error:", err.message);
-    return res.status(500).json({ error: err.message });
+    console.error("Scraper error:", err);
+    return res.status(500).json({ error: err.message || "Internal error" });
   }
 }
