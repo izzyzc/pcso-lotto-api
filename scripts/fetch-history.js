@@ -10,11 +10,11 @@ const SCRAPE_URL = "https://pcso-lotto-api.vercel.app/api/scrape";
 
 // Game list + start years (rough estimates, adjust as needed)
 const GAMES = {
-  "Ultra Lotto 6/58": 2015,
-  "Grand Lotto 6/55": 2010,
-  "Super Lotto 6/49": 2000,
-  "Mega Lotto 6/45": 2000,
-  "Lotto 6/42": 1995,
+  "Ultra Lotto 6/58": 2022,
+  "Grand Lotto 6/55": 2022,
+  "Super Lotto 6/49": 2022,
+  "Mega Lotto 6/45": 2022,
+  "Lotto 6/42": 2022,
 };
 
 async function fetchResult(game, date) {
