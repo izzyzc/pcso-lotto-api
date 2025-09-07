@@ -8,12 +8,12 @@ const BASE_URL = "https://www.lottopcso.com";
 const DATA_DIR = path.join(process.cwd(), "data");
 
 // Lotto games mapping
-const GAMES = {
-  "Ultra Lotto 6/58": "ultra-658.json",
-  "Grand Lotto 6/55": "grand-655.json",
-  "Super Lotto 6/49": "super-649.json",
-  "Mega Lotto 6/45": "mega-645.json",
-  "Lotto 6/42": "lotto-642.json",
+const GAME_FILES = {
+  "Ultra Lotto 6/58": "ultra-lotto-6-58.json",
+  "Grand Lotto 6/55": "grand-lotto-6-55.json",
+  "Super Lotto 6/49": "super-lotto-6-49.json",
+  "Mega Lotto 6/45": "mega-lotto-6-45.json",
+  "Lotto 6/42": "lotto-6-42.json"
 };
 
 // Utility: format date to yyyy-mm-dd
