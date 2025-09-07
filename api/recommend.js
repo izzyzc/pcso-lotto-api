@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 
     const results = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-    // Count frequency
+    // Count frequency of each number
     const freqMap = {};
     results.forEach(draw => {
       draw.numbers.forEach(num => {
@@ -42,13 +42,13 @@ export default async function handler(req, res) {
     }));
     freqArray.sort((a, b) => b.count - a.count);
 
-    // Take top 6 numbers
-    const recommended = freqArray.slice(0, 6).map(item => item.number);
+    // Take top 6 numbers with counts
+    const recommended = freqArray.slice(0, 6);
 
     return res.status(200).json({
       game,
       draws: results.length,
-      recommended, // top 6 numbers
+      recommended, // array of { number, count }
     });
   } catch (err) {
     console.error("Recommend error:", err.message);
