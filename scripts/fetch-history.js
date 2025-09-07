@@ -2,65 +2,129 @@
 import fs from "fs";
 import path from "path";
 import axios from "axios";
+import * as cheerio from "cheerio";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+const BASE_URL = "https://www.lottopcso.com";
+const DATA_DIR = path.resolve("data");
 
-// Your deployed scrape endpoint
-const SCRAPE_URL = "https://pcso-lotto-api.vercel.app/api/scrape";
-
-// Game list + start years (rough estimates, adjust as needed)
+// Map game names to slugs
 const GAMES = {
-  "Ultra Lotto 6/58": 2022,
-  "Grand Lotto 6/55": 2022,
-  "Super Lotto 6/49": 2022,
-  "Mega Lotto 6/45": 2022,
-  "Lotto 6/42": 2022,
+  "Ultra Lotto 6/58": "ultra-lotto-6-58",
+  "Grand Lotto 6/55": "grand-lotto-6-55",
+  "Super Lotto 6/49": "super-lotto-6-49",
+  "Mega Lotto 6/45": "mega-lotto-6-45",
+  "Lotto 6/42": "lotto-6-42",
 };
 
-async function fetchResult(game, date) {
-  try {
-    const res = await axios.get(SCRAPE_URL, {
-      params: { game, date },
-    });
-    return res.data;
-  } catch (err) {
-    if (err.response && err.response.status === 404) return null;
-    console.warn(`Error for ${game} on ${date}: ${err.message}`);
-    return null;
+// Fallback mapping (short slugs)
+function mapGameToFallbackUrl(game) {
+  switch (game) {
+    case "Ultra Lotto 6/58": return "6-58";
+    case "Grand Lotto 6/55": return "6-55";
+    case "Super Lotto 6/49": return "6-49";
+    case "Mega Lotto 6/45": return "6-45";
+    case "Lotto 6/42": return "6-42";
+    default: throw new Error("Unknown game: " + game);
   }
 }
 
-function formatDate(yyyy, mm, dd) {
-  return `${yyyy}-${String(mm).padStart(2, "0")}-${String(dd).padStart(2, "0")}`;
+// Try to scrape a given URL
+async function scrapePage(url) {
+  const response = await axios.get(url);
+  const $ = cheerio.load(response.data);
+
+  const rows = $("div.post_content table tbody tr");
+  let numbers = [];
+  let jackpot = "N/A";
+  let winners = "0";
+
+  rows.each((_, row) => {
+    const cells = $(row).find("td");
+    if (cells.length >= 2) {
+      const label = $(cells[0]).text().toLowerCase();
+      if (label.includes("winning combination") && numbers.length === 0) {
+        numbers = $(cells[1])
+          .text()
+          .split("-")
+          .map((n) => n.trim())
+          .filter(Boolean);
+      } else if (label.includes("jackpot prize") && jackpot === "N/A") {
+        jackpot = $(cells[1]).text().trim();
+      } else if (label.includes("number of winner")) {
+        winners = $(cells[1]).text().trim();
+      }
+    }
+  });
+
+  if (numbers.length === 0) return null;
+
+  return { numbers, jackpot, winners };
 }
 
-async function fetchHistory() {
-  for (const [game, startYear] of Object.entries(GAMES)) {
-    const results = [];
-    const today = new Date();
-    console.log(`Fetching history for ${game}...`);
+// Fetch result with fallback
+async function fetchResult(game, slug, date) {
+  const month = date.toLocaleString("en-US", { month: "long" }).toLowerCase();
+  const day = date.getDate();
+  const year = date.getFullYear();
 
-    for (let year = startYear; year <= today.getFullYear(); year++) {
-      for (let month = 1; month <= 12; month++) {
-        for (let day = 1; day <= 31; day++) {
-          const dateStr = formatDate(year, month, day);
-          const dateObj = new Date(dateStr);
-          if (dateObj > today) continue;
+  // Primary URL
+  let url = `${BASE_URL}/${slug}-results-for-${month}-${day}-${year}/`;
+  try {
+    const result = await scrapePage(url);
+    if (result) {
+      return { date: date.toISOString().split("T")[0], ...result };
+    }
+  } catch (err) {
+    console.warn(`⚠️ Primary failed: ${url} — ${err.message}`);
+  }
 
-          const result = await fetchResult(game, dateStr);
-          if (result && result.numbers?.length) {
-            results.push(result);
-            console.log(`${game} ✅ ${dateStr}: ${result.numbers.join(", ")}`);
-          }
-        }
+  // Fallback URL
+  try {
+    const fallbackSlug = mapGameToFallbackUrl(game);
+    url = `${BASE_URL}/${fallbackSlug}-lotto-result-${month}-${day}-${year}/`;
+    const result = await scrapePage(url);
+    if (result) {
+      return { date: date.toISOString().split("T")[0], ...result };
+    }
+  } catch (err) {
+    console.warn(`❌ Fallback failed for ${game} on ${date.toISOString().split("T")[0]}`);
+  }
+
+  return null;
+}
+
+// Run for a specific year
+async function fetchHistoryForYear(year) {
+  for (const [game, slug] of Object.entries(GAMES)) {
+    const filePath = path.join(DATA_DIR, `${slug}.json`);
+
+    // Load existing data if present
+    let results = [];
+    if (fs.existsSync(filePath)) {
+      results = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    }
+
+    console.log(`📅 Fetching ${game} for ${year}...`);
+
+    // Loop through all days of the year
+    const start = new Date(`${year}-01-01`);
+    const end = new Date(`${year}-12-31`);
+
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+      const result = await fetchResult(game, slug, new Date(d));
+      if (result && !results.some((r) => r.date === result.date)) {
+        results.push(result);
+        console.log(`✅ Saved ${game} - ${result.date}: ${result.numbers.join(", ")}`);
       }
     }
 
-    // Save JSON
-    const fileName = path.join(DATA_DIR, `${game.toLowerCase().replace(/\s|\//g, "-")}.json`);
-    fs.writeFileSync(fileName, JSON.stringify(results, null, 2));
-    console.log(`Saved ${results.length} draws for ${game}`);
+    // Sort and save
+    results.sort((a, b) => new Date(a.date) - new Date(b.date));
+    fs.writeFileSync(filePath, JSON.stringify(results, null, 2));
   }
 }
 
-fetchHistory();
+// Run for 2022 first
+fetchHistoryForYear(2022).then(() => {
+  console.log("🎉 Done fetching 2022 draws!");
+});
