@@ -16,8 +16,8 @@ export default function handler(req, res) {
   try {
     const { game, date } = req.query;
 
-    if (!game || !date) {
-      return res.status(400).json({ error: "Missing required params: game, date" });
+    if (!game) {
+      return res.status(400).json({ error: "Missing required param: game" });
     }
 
     const fileName = GAME_FILES[game];
@@ -31,12 +31,19 @@ export default function handler(req, res) {
     }
 
     const results = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    const result = results.find(r => r.date === date);
 
-    if (!result) {
-      return res.status(404).json({
-        error: `No result found for ${game} on ${date}`,
-      });
+    let result;
+    if (date) {
+      // Specific date requested
+      result = results.find(r => r.date === date);
+      if (!result) {
+        return res.status(404).json({
+          error: `No result found for ${game} on ${date}`,
+        });
+      }
+    } else {
+      // No date → latest draw (last entry in array)
+      result = results[results.length - 1];
     }
 
     return res.status(200).json({
