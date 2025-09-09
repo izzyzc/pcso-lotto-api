@@ -8,7 +8,7 @@ on:
       inputs:
       winnersOnly:
         description: "Run in winners-only patch mode?"
-        required: false
+        required: true
         default: "false"
         type: choice
         options:
