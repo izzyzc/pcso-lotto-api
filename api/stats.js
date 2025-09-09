@@ -39,8 +39,8 @@ export default function handler(req, res) {
     // total draws
     const draws = results.length;
 
-    // latest result (files are stored oldest-first in your updater)
-    const latest = results[results.length - 1];
+    // latest result 
+    const latest = results[0];
 
     // frequency count
     const freqMap = {};
