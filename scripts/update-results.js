@@ -16,6 +16,8 @@ const GAME_FILES = {
   "Lotto 6/42": "lotto-6-42.json"
 };
 
+const WINNERS_ONLY = process.env.WINNERS_ONLY === "true"; // 🟠 mode flag
+
 // Utility: format date to yyyy-mm-dd
 function formatDate(date) {
   return date.toISOString().split("T")[0];
@@ -98,7 +100,39 @@ async function updateAllGames() {
       results = JSON.parse(fs.readFileSync(filePath, "utf-8"));
     }
 
-    // Check if today's result already exists
+    // 🟠 Winners-only patch mode
+    if (WINNERS_ONLY) {
+      let updated = false;
+
+      // Check last 7 draws
+      for (let i = 0; i < Math.min(results.length, 7); i++) {
+        const entry = results[i];
+
+        if (entry.winners === "*" || !entry.winners || entry.winners === "0") {
+          try {
+            const entryDate = new Date(entry.date);
+            const url = buildUrl(game, entryDate);
+            const fresh = await scrapeResult(game, entryDate, url);
+
+            if (fresh.winners && fresh.winners !== "*" && fresh.winners !== entry.winners) {
+              console.log(`🔄 Updated winners for ${game} on ${entry.date}: ${fresh.winners}`);
+              entry.winners = fresh.winners;
+              updated = true;
+            }
+          } catch (err) {
+            console.warn(`⚠️ Could not update winners for ${game} on ${entry.date}: ${err.message}`);
+          }
+        }
+      }
+
+      if (updated) {
+        fs.writeFileSync(filePath, JSON.stringify(results, null, 2));
+      }
+
+      continue; // skip to next game
+    }
+
+    // 🟢 Normal nightly run
     const todayStr = formatDate(today);
     if (results.some(r => r.date === todayStr)) {
       console.log(`⏭️ Already have ${game} for ${todayStr}`);
