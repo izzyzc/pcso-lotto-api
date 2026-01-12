@@ -16,15 +16,21 @@ const GAMES = {
   "Lotto 6/42": "lotto-6-42",
 };
 
-// Fallback mapping (short slugs)
-function mapGameToFallbackUrl(game) {
+// Fallback mappings (try in order)
+function mapGameToFallbackUrls(game) {
   switch (game) {
-    case "Ultra Lotto 6/58": return "6-58";
-    case "Grand Lotto 6/55": return "6-55";
-    case "Super Lotto 6/49": return "6-49";
-    case "Mega Lotto 6/45": return "6-45";
-    case "Lotto 6/42": return "6-42";
-    default: throw new Error("Unknown game: " + game);
+    case "Ultra Lotto 6/58":
+      return ["6-58-ultra-lotto", "6-58"];
+    case "Grand Lotto 6/55":
+      return ["6-55-grand-lotto", "6-55"];
+    case "Super Lotto 6/49":
+      return ["6-49-super-lotto", "6-49"];
+    case "Mega Lotto 6/45":
+      return ["6-45-mega-lotto", "6-45"];
+    case "Lotto 6/42":
+      return ["6-42-lotto", "6-42"];
+    default:
+      throw new Error("Unknown game: " + game);
   }
 }
 
