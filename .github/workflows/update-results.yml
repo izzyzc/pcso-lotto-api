@@ -1,0 +1,91 @@
+name: Update Lotto Results
+
+on:
+  schedule:
+    - cron: "30 13 * * *" # 🟢 9:30 PM PH time (draw time)
+    - cron: "0 0 * * *"   # 🟠 8:00 AM PH time (winners patch)
+  workflow_dispatch:
+    inputs:
+      winnersOnly:
+        description: "Run in winners-only patch mode?"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      target_date:
+        description: "Backfill date (YYYY-MM-DD)"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install axios cheerio
+
+      - name: Run update script
+        id: updater
+        run: |
+          echo "🕒 Event schedule: ${{ github.event.schedule }}"
+          echo "🎯 Target date: ${{ github.event.inputs.target_date }}"
+          echo "🟠 Winners only: ${{ github.event.inputs.winnersOnly }}"
+
+          # Scheduled winners-only patch (8AM PH)
+          if [ "${{ github.event.schedule }}" = "0 0 * * *" ]; then
+            echo "🟠 Scheduled winners-only patch"
+            WINNERS_ONLY=true node scripts/update-results.js
+            echo "mode=winners" >> $GITHUB_OUTPUT
+
+          # Manual winners-only run
+          elif [ "${{ github.event.inputs.winnersOnly }}" = "true" ]; then
+            echo "🟠 Manual winners-only patch"
+            WINNERS_ONLY=true TARGET_DATE="${{ github.event.inputs.target_date }}" node scripts/update-results.js
+            echo "mode=winners" >> $GITHUB_OUTPUT
+
+          # Manual or scheduled backfill / normal run
+          else
+            echo "🟢 Full update run"
+            TARGET_DATE="${{ github.event.inputs.target_date }}" node scripts/update-results.js
+            echo "mode=full" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add data/*.json
+
+          if git diff --cached --quiet; then
+            echo "ℹ️ No changes to commit"
+            exit 0
+          fi
+
+          if [ "${{ steps.updater.outputs.mode }}" = "winners" ]; then
+            git commit -m "🔄 Winners-only patch update"
+          else
+            if [ -n "${{ github.event.inputs.target_date }}" ]; then
+              git commit -m "📅 Backfill results for ${{ github.event.inputs.target_date }}"
+            else
+              git commit -m "🌙 Full nightly update"
+            fi
+          fi
+
+          git pull --rebase --autostash origin main
+          git push
