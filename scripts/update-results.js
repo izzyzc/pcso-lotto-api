@@ -57,7 +57,7 @@ function buildFallbackUrls(game, dateObj) {
   const year = dateObj.getFullYear();
 
   return mapGameToFallbackUrls(game).map(
-    slug => `${BASE_URL}/${slug}-lotto-result-${month}-${day}-${year}/`
+    slug => `${BASE_URL}/${slug}-lotto-results-for-${month}-${day}-${year}/`
   );
 }
 
