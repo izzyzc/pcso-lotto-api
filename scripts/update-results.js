@@ -17,6 +17,7 @@ const GAME_FILES = {
 };
 
 const WINNERS_ONLY = process.env.WINNERS_ONLY === "true";
+const TARGET_DATE = process.env.TARGET_DATE || null;
 
 // Utility: format date to yyyy-mm-dd
 function formatDate(date) {
@@ -103,7 +104,11 @@ async function scrapeResult(dateObj, url) {
 
 // Main updater
 async function updateAllGames() {
-  const today = new Date();
+  // const today = new Date();
+  const today = TARGET_DATE ? new Date(TARGET_DATE) : new Date();
+  if (TARGET_DATE && isNaN(today)) {
+  throw new Error("Invalid TARGET_DATE format. Use YYYY-MM-DD");
+  }
   const todayStr = formatDate(today);
 
   for (const [game, fileName] of Object.entries(GAME_FILES)) {
