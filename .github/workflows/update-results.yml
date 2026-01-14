@@ -2,8 +2,8 @@ name: Update Lotto Results
 
 on:
   schedule:
-    - cron: "30 13 * * *" # 🟢 9:30 PM PH time (draw time)
-    - cron: "0 0 * * *"   # 🟠 8:00 AM PH time (winners patch)
+    - cron: "30 13 * * *"   # 🟢 9:30 PM PH time (draw time ≈ 1:30 PM UTC next day? Adjust if needed)
+    - cron: "0 0 * * *"     # 🟠 8:00 AM PH time (winners patch)
   workflow_dispatch:
     inputs:
       winnersOnly:
@@ -27,17 +27,58 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4           # ← Updated to v4
         with:
           persist-credentials: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4         # ← Updated to v4
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install axios cheerio
+      - name: Install system dependencies for Puppeteer/Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            ca-certificates \
+            fonts-liberation \
+            libasound2 \
+            libatk-bridge2.0-0 \
+            libatk1.0-0 \
+            libc6 \
+            libcairo2 \
+            libcups2 \
+            libdbus-1-3 \
+            libexpat1 \
+            libfontconfig1 \
+            libgbm1 \
+            libgcc1 \
+            libglib2.0-0 \
+            libgtk-3-0 \
+            libnspr4 \
+            libnss3 \
+            libpango-1.0-0 \
+            libpangocairo-1.0-0 \
+            libstdc++6 \
+            libx11-6 \
+            libx11-xcb1 \
+            libxcb1 \
+            libxcomposite1 \
+            libxcursor1 \
+            libxdamage1 \
+            libxext6 \
+            libxfixes3 \
+            libxi6 \
+            libxrandr2 \
+            libxrender1 \
+            libxss1 \
+            libxtst6 \
+            lsb-release \
+            wget \
+            xdg-utils
+
+      - name: Install npm dependencies (including puppeteer)
+        run: npm install
 
       - name: Run update script
         id: updater
@@ -45,19 +86,19 @@ jobs:
           echo "🕒 Event schedule: ${{ github.event.schedule }}"
           echo "🎯 Target date: ${{ github.event.inputs.target_date }}"
           echo "🟠 Winners only: ${{ github.event.inputs.winnersOnly }}"
-
+          
           # Scheduled winners-only patch (8AM PH)
           if [ "${{ github.event.schedule }}" = "0 0 * * *" ]; then
             echo "🟠 Scheduled winners-only patch"
             WINNERS_ONLY=true node scripts/update-results.js
             echo "mode=winners" >> $GITHUB_OUTPUT
-
+          
           # Manual winners-only run
           elif [ "${{ github.event.inputs.winnersOnly }}" = "true" ]; then
             echo "🟠 Manual winners-only patch"
             WINNERS_ONLY=true TARGET_DATE="${{ github.event.inputs.target_date }}" node scripts/update-results.js
             echo "mode=winners" >> $GITHUB_OUTPUT
-
+          
           # Manual or scheduled backfill / normal run
           else
             echo "🟢 Full update run"
@@ -69,14 +110,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
           git add data/*.json
-
           if git diff --cached --quiet; then
             echo "ℹ️ No changes to commit"
             exit 0
           fi
-
           if [ "${{ steps.updater.outputs.mode }}" = "winners" ]; then
             git commit -m "🔄 Winners-only patch update"
           else
@@ -86,6 +124,5 @@ jobs:
               git commit -m "🌙 Full nightly update"
             fi
           fi
-
-          git pull --rebase --autostash origin main
+          git pull --rebase --autostash origin ${{ github.ref_name }}
           git push
