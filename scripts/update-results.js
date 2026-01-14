@@ -56,50 +56,79 @@ function buildFallbackUrls(game, dateObj) {
   const month = dateObj.toLocaleString("en-US", { month: "long" }).toLowerCase();
   const day = dateObj.getDate();
   const year = dateObj.getFullYear();
-
   return mapGameToFallbackUrls(game).map(
     slug => `${BASE_URL}/${slug}-lotto-results-for-${month}-${day}-${year}/`
   );
 }
 
+// Shared axios config with headers
+const axiosConfig = {
+  timeout: 15000,
+  headers: {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.lottopcso.com/",
+  }
+};
+
 // Scrape page
 async function scrapeResult(dateObj, url) {
-  const res = await axios.get(url, { timeout: 15000 });
-  const $ = cheerio.load(res.data);
+  try {
+    const res = await axios.get(url, axiosConfig);
+    console.log(`[DEBUG] Status for ${url}: ${res.status}`);
 
-  let numbers = [];
-  let jackpot = "N/A";
-  let winners = "0";
+    // Optional: log first chunk for debugging failed parses
+    // console.log(`[DEBUG] HTML snippet: ${res.data.substring(0, 800)}`);
 
-  const table = $("div.post_content table").first();
-  table.find("tbody tr").each((_, row) => {
-    const cells = $(row).find("td");
-    if (cells.length >= 2) {
-      const label = $(cells[0]).text().toLowerCase();
+    const $ = cheerio.load(res.data);
+    let numbers = [];
+    let jackpot = "N/A";
+    let winners = "0";
 
-      if (label.includes("winning combination")) {
-        numbers = $(cells[1])
-          .text()
-          .split("-")
-          .map(n => n.trim())
-          .filter(Boolean);
-      } else if (label.includes("jackpot prize") && jackpot === "N/A") {
-        jackpot = $(cells[1]).text().trim();
-      } else if (label.includes("number of winner")) {
-        winners = $(cells[1]).text().trim();
-      }
+    const table = $("div.post_content table").first();
+    // Fallback selector if .post_content missing
+    if (!table.length) {
+      table = $("table").first(); // or $(".entry-content table").first()
     }
-  });
 
-  if (!numbers.length) return null;
+    table.find("tbody tr").each((_, row) => {
+      const cells = $(row).find("td, th"); // support th too
+      if (cells.length >= 2) {
+        const label = $(cells[0]).text().toLowerCase().trim();
+        const valueCell = $(cells[1]);
+        const value = valueCell.text().trim();
 
-  return {
-    date: formatDate(dateObj),
-    numbers,
-    jackpot,
-    winners,
-    source: url
-  };
+        if (label.includes("winning combination") || label.includes("combination")) {
+          numbers = value
+            .split("-")
+            .map(n => n.trim())
+            .filter(Boolean);
+        } else if (label.includes("jackpot prize") || label.includes("jackpot")) {
+          jackpot = value;
+        } else if (label.includes("winner") || label.includes("number of winner")) {
+          winners = value.replace(/[^0-9]/g, ""); // extract digits only
+          if (!winners || winners === "") winners = "0"; // handle *, empty, etc.
+        }
+      }
+    });
+
+    if (!numbers.length) {
+      console.warn(`[WARN] No numbers found in ${url}`);
+      return null;
+    }
+
+    return {
+      date: formatDate(dateObj),
+      numbers,
+      jackpot,
+      winners,
+      source: url
+    };
+  } catch (err) {
+    console.error(`[ERROR] Fetch failed for ${url}: ${err.message}`);
+    return null;
+  }
 }
 
 // Main updater
