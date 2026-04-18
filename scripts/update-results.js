@@ -50,35 +50,37 @@ async function fetchResult(game, targetDateObj) {
       return null;
     }
 
-    const gameCode = GAME_CODE_MAP[game];
-    const gameNameLower = game.toLowerCase().replace(/\s+/g, "");
+    const gameNameLower = game.toLowerCase();
 
     for (const draw of draws) {
       const gamesList = draw.games || draw.results || [];
 
-      const gameResult = gamesList.find(g => {
-        if (!g) return false;
-        return (
-          g.gameCode === gameCode ||
-          (g.gameName && g.gameName.toLowerCase().includes(gameNameLower)) ||
-          (g.game && g.game.toLowerCase().includes(gameNameLower))
-        );
-      });
+      for (const g of gamesList) {
+        if (!g || !g.numbers || g.numbers.length === 0) continue;
 
-      if (gameResult && gameResult.numbers && gameResult.numbers.length > 0) {
-        console.log(`[DEBUG] Found match for ${game} on ${targetDateStr}`);
+        const apiGameName = (g.gameName || "").toLowerCase();
+        const apiGameCode = (g.gameCode || "").toLowerCase();
 
-        return {
-          date: draw.drawDate ? draw.drawDate.split("T")[0] : targetDateStr,
-          numbers: gameResult.numbers,
-          jackpot: gameResult.prizeAmount 
-            ? `Php ${Number(gameResult.prizeAmount).toLocaleString()}` 
-            : (gameResult.jackpotAmount ? `Php ${Number(gameResult.jackpotAmount).toLocaleString()}` : "N/A"),
-          winners: gameResult.winnersCount != null 
-            ? gameResult.winnersCount.toString() 
-            : "0",
-          source: "pcsolotto.org API"
-        };
+        // More flexible matching
+        if (
+          apiGameCode.includes(gameNameLower.replace(/\s+/g, "_")) ||
+          apiGameName.includes(gameNameLower) ||
+          apiGameName.replace(/\s+/g, "").includes(gameNameLower.replace(/\s+/g, ""))
+        ) {
+          console.log(`[DEBUG] Found match for ${game} → ${apiGameName || apiGameCode}`);
+
+          return {
+            date: draw.drawDate ? draw.drawDate.split("T")[0] : targetDateStr,
+            numbers: g.numbers,
+            jackpot: g.prizeAmount 
+              ? `Php ${Number(g.prizeAmount).toLocaleString()}` 
+              : "N/A",
+            winners: g.winnersCount != null 
+              ? g.winnersCount.toString() 
+              : "0",
+            source: "pcsolotto.org API"
+          };
+        }
       }
     }
 
