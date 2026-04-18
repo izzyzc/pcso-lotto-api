@@ -40,7 +40,7 @@ export default function handler(req, res) {
     const draws = results.length;
 
     // latest result 
-    const latest = results[0];
+    const latest = results[results.length - 1];
 
     // frequency count
     const freqMap = {};
