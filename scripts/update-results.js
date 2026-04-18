@@ -58,7 +58,9 @@ async function fetchResult(game, targetDateObj) {
           jackpot: gameResult.prizeAmount 
             ? `Php ${Number(gameResult.prizeAmount).toLocaleString()}` 
             : "N/A",
-          winners: (gameResult.winnersCount ?? 0).toString(),
+          winners: gameResult.winnersCount != null 
+            ? gameResult.winnersCount.toString() 
+            : "0",
           source: "pcsolotto.org API"
         };
       }
