@@ -61,95 +61,53 @@ function buildFallbackUrls(game, dateObj) {
   );
 }
 
-// Scrape page using Puppeteer (replaces axios for better browser emulation)
-async function scrapeResult(dateObj, url) {
-  let browser;
+// New API-based fetch function (replaces scrapeResult)
+async function fetchResult(game, targetDateObj) {
+  const todayStr = formatDate(targetDateObj);
   try {
-    // Launch Puppeteer with options for headless mode and GitHub Actions compatibility
-    browser = await puppeteer.launch({
-      headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-gpu',
-        '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'
-      ]
-    });
-    const page = await browser.newPage();
-
-    // Set extra headers to mimic browser
-    await page.setExtraHTTPHeaders({
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-      'Accept-Language': 'en-US,en;q=0.9',
-      'Priority': 'u=0, i',
-      'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"',
-      'Sec-Ch-Ua-Mobile': '?0',
-      'Sec-Ch-Ua-Platform': '"Windows"',
-      'Sec-Fetch-Dest': 'document',
-      'Sec-Fetch-Mode': 'navigate',
-      'Sec-Fetch-Site': 'none',
-      'Sec-Fetch-User': '?1',
-      'Upgrade-Insecure-Requests': '1'
+    const response = await axios.get("https://pcsolotto.org/api/v2/results", {
+      params: { date: todayStr },
+      timeout: 15000
     });
 
-    const response = await page.goto(url, { waitUntil: 'networkidle2', timeout: 15000 });
-    console.log(`[DEBUG] Status for ${url}: ${response.status()}`);
+    const data = response.data;
+    const draws = data.draws || data.data || [];
 
-    const html = await page.content();
-    const $ = cheerio.load(html);
-
-    let numbers = [];
-    let jackpot = "N/A";
-    let winners = "0";
-
-    let table = $("div.post_content table").first();
-    // Fallback selector if .post_content missing
-    if (!table.length) {
-      table = $("table").first(); // or $(".entry-content table").first()
-    }
-
-    table.find("tbody tr").each((_, row) => {
-      const cells = $(row).find("td, th"); // support th too
-      if (cells.length >= 2) {
-        const label = $(cells[0]).text().toLowerCase().trim();
-        const value = $(cells[1]).text().trim();
-
-        if (label.includes("winning combination") || label.includes("combination")) {
-          numbers = value
-            .split("-")
-            .map(n => n.trim())
-            .filter(Boolean);
-        } else if (label.includes("jackpot prize") || label.includes("jackpot")) {
-          jackpot = value;
-        } else if (label.includes("winner") || label.includes("number of winner")) {
-          winners = value.replace(/[^0-9]/g, ""); // extract digits only
-          if (!winners || winners === "") winners = "0"; // handle *, empty, etc.
-        }
-      }
-    });
-
-    if (!numbers.length) {
-      console.warn(`[WARN] No numbers found in ${url}`);
-      return null;
-    }
-
-    return {
-      date: formatDate(dateObj),
-      numbers,
-      jackpot,
-      winners,
-      source: url
+    const gameCodeMap = {
+      "Ultra Lotto 6/58": "ultra_lotto_6_58",
+      "Grand Lotto 6/55": "grand_lotto_6_55",
+      "Super Lotto 6/49": "super_lotto_6_49",
+      "Mega Lotto 6/45": "mega_lotto_6_45",
+      "Lotto 6/42":     "lotto_6_42"
     };
-  } catch (err) {
-    console.error(`[ERROR] Fetch failed for ${url}: ${err.message}`);
+
+    for (const draw of draws) {
+      const gameResult = draw.games?.find(g => 
+        g.gameCode === gameCodeMap[game] || 
+        g.gameName?.toLowerCase().includes(game.toLowerCase().replace(/\s+/g, ""))
+      );
+
+      if (gameResult && gameResult.numbers && gameResult.numbers.length > 0) {
+        return {
+          date: draw.drawDate ? draw.drawDate.split("T")[0] : todayStr,
+          numbers: gameResult.numbers,
+          jackpot: gameResult.prizeAmount 
+            ? `Php ${Number(gameResult.prizeAmount).toLocaleString()}` 
+            : "N/A",
+          winners: (gameResult.winnersCount || 0).toString(),
+          source: "pcsolotto.org API"
+        };
+      }
+    }
+    console.warn(`[WARN] No data found for ${game} on ${todayStr} in API response`);
     return null;
-  } finally {
-    if (browser) await browser.close();
+  } catch (err) {
+    console.error(`[ERROR] API request failed for ${game}: ${err.message}`);
+    return null;
   }
 }
 
-// Main updater
+// Main updater (only small changes in the loops)
 async function updateAllGames() {
   const today = TARGET_DATE ? new Date(TARGET_DATE) : new Date();
   if (TARGET_DATE && isNaN(today)) {
@@ -164,25 +122,17 @@ async function updateAllGames() {
       results = JSON.parse(fs.readFileSync(filePath, "utf-8"));
     }
 
-    // 🟠 WINNERS-ONLY PATCH MODE
+    // 🟠 WINNERS-ONLY PATCH MODE (kept almost identical)
     if (WINNERS_ONLY) {
       let updated = false;
       for (let i = 0; i < Math.min(results.length, 7); i++) {
         const entry = results[i];
         if (!entry.winners || entry.winners === "*" || entry.winners === "0") {
-          const entryDate = new Date(entry.date);
-          const urls = [
-            buildPrimaryUrl(game, entryDate),
-            ...buildFallbackUrls(game, entryDate)
-          ];
-          for (const url of urls) {
-            const fresh = await scrapeResult(entryDate, url);
-            if (fresh?.winners && fresh.winners !== "*" && fresh.winners !== entry.winners) {
-              entry.winners = fresh.winners;
-              updated = true;
-              console.log(`🔄 Winners updated: ${game} ${entry.date} → ${fresh.winners}`);
-              break;
-            }
+          const fresh = await fetchResult(game, new Date(entry.date));
+          if (fresh?.winners && fresh.winners !== "*" && fresh.winners !== entry.winners) {
+            entry.winners = fresh.winners;
+            updated = true;
+            console.log(`🔄 Winners updated: ${game} ${entry.date} → ${fresh.winners}`);
           }
         }
       }
@@ -198,16 +148,7 @@ async function updateAllGames() {
       continue;
     }
 
-    let result = null;
-    const urls = [
-      buildPrimaryUrl(game, today),
-      ...buildFallbackUrls(game, today)
-    ];
-
-    for (const url of urls) {
-      result = await scrapeResult(today, url);
-      if (result) break;
-    }
+    const result = await fetchResult(game, today);
 
     if (result) {
       results.unshift(result);
