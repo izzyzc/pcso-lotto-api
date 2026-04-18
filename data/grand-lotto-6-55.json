@@ -1,733 +1,5 @@
 [
   {
-    "date": "2026-04-15",
-    "numbers": [
-      32,
-      43,
-      20,
-      46,
-      9,
-      15
-    ],
-    "jackpot": "Php 51,762,661.04",
-    "winners": "0",
-    "source": "pcsolotto.org API"
-  },
-  {
-    "date": "2026-01-07",
-    "numbers": [
-      "34",
-      "41",
-      "44",
-      "37",
-      "38",
-      "19"
-    ],
-    "jackpot": "Php 29,700,000.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-january-7-2026/"
-  },
-  {
-    "date": "2026-01-05",
-    "numbers": [
-      "20",
-      "15",
-      "33",
-      "50",
-      "3",
-      "45"
-    ],
-    "jackpot": "Php 29,700,000.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-january-5-2026/"
-  },
-  {
-    "date": "2026-01-03",
-    "numbers": [
-      "13",
-      "42",
-      "6",
-      "45",
-      "24",
-      "33"
-    ],
-    "jackpot": "Php 288,616.075.00",
-    "winners": "1",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-january-3-2026/"
-  },
-  {
-    "date": "2025-12-31",
-    "numbers": [
-      "50",
-      "1",
-      "41",
-      "40",
-      "32",
-      "35"
-    ],
-    "jackpot": "Php 278,486.984.60",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-31-2025/"
-  },
-  {
-    "date": "2025-12-29",
-    "numbers": [
-      "44",
-      "25",
-      "14",
-      "52",
-      "45",
-      "38"
-    ],
-    "jackpot": "Php 269,216,884.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-29-2025/"
-  },
-  {
-    "date": "2025-12-27",
-    "numbers": [
-      "41",
-      "16",
-      "45",
-      "20",
-      "52",
-      "1"
-    ],
-    "jackpot": "Php 258,798,014.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-27-2025/"
-  },
-  {
-    "date": "2025-12-24",
-    "numbers": [
-      "18",
-      "13",
-      "39",
-      "51",
-      "19",
-      "21"
-    ],
-    "jackpot": "Php 248,525,475.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-24-2025/"
-  },
-  {
-    "date": "2025-12-22",
-    "numbers": [
-      "53",
-      "38",
-      "23",
-      "1",
-      "10",
-      "18"
-    ],
-    "jackpot": "Php 240,001,724.60",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-22-2025/"
-  },
-  {
-    "date": "2025-12-20",
-    "numbers": [
-      "5",
-      "45",
-      "3",
-      "35",
-      "49",
-      "42"
-    ],
-    "jackpot": "Php 230,550,309.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-20-2025/"
-  },
-  {
-    "date": "2025-12-17",
-    "numbers": [
-      "14",
-      "8",
-      "1",
-      "51",
-      "39",
-      "48"
-    ],
-    "jackpot": "Php 220,987,758.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-17-2025/"
-  },
-  {
-    "date": "2025-12-15",
-    "numbers": [
-      "25",
-      "54",
-      "15",
-      "38",
-      "45",
-      "28"
-    ],
-    "jackpot": "Php 212,219,015.80",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-15-2025/"
-  },
-  {
-    "date": "2025-12-13",
-    "numbers": [
-      "46",
-      "52",
-      "9",
-      "37",
-      "40",
-      "17"
-    ],
-    "jackpot": "Php 204,170,773.40",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-13-2025/"
-  },
-  {
-    "date": "2025-12-10",
-    "numbers": [
-      "53",
-      "30",
-      "6",
-      "17",
-      "11",
-      "45"
-    ],
-    "jackpot": "Php 195,803,522.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-10-2025/"
-  },
-  {
-    "date": "2025-12-08",
-    "numbers": [
-      "36",
-      "22",
-      "49",
-      "51",
-      "45",
-      "5"
-    ],
-    "jackpot": "Php 188,122,816.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-8-2025/"
-  },
-  {
-    "date": "2025-12-06",
-    "numbers": [
-      "52",
-      "8",
-      "35",
-      "37",
-      "42",
-      "32"
-    ],
-    "jackpot": "Php 180,675,244.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-6-2025/"
-  },
-  {
-    "date": "2025-12-03",
-    "numbers": [
-      "54",
-      "50",
-      "14",
-      "2",
-      "25",
-      "38"
-    ],
-    "jackpot": "Php 172,931,530.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-3-2025/"
-  },
-  {
-    "date": "2025-12-01",
-    "numbers": [
-      "38",
-      "41",
-      "42",
-      "2",
-      "5",
-      "49"
-    ],
-    "jackpot": "Php 165,699,861.80",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-1-2025/"
-  },
-  {
-    "date": "2025-11-29",
-    "numbers": [
-      "17",
-      "15",
-      "41",
-      "27",
-      "25",
-      "10"
-    ],
-    "jackpot": "Php 158,846,527.40",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-29-2025/"
-  },
-  {
-    "date": "2025-11-26",
-    "numbers": [
-      "24",
-      "42",
-      "33",
-      "19",
-      "6",
-      "20"
-    ],
-    "jackpot": "Php 152,234,211.80",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-26-2025/"
-  },
-  {
-    "date": "2025-11-22",
-    "numbers": [
-      "3",
-      "40",
-      "11",
-      "53",
-      "39",
-      "26"
-    ],
-    "jackpot": "Php 140,522,916.60",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-22-2025/"
-  },
-  {
-    "date": "2025-11-19",
-    "numbers": [
-      "28",
-      "50",
-      "32",
-      "12",
-      "8",
-      "38"
-    ],
-    "jackpot": "Php 133,980,882.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-19-2025/"
-  },
-  {
-    "date": "2025-11-17",
-    "numbers": [
-      "5",
-      "44",
-      "40",
-      "12",
-      "50",
-      "22"
-    ],
-    "jackpot": "Php 128,198,961.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-17-2025/"
-  },
-  {
-    "date": "2025-11-15",
-    "numbers": [
-      "11",
-      "52",
-      "14",
-      "21",
-      "30",
-      "7"
-    ],
-    "jackpot": "Php 122,415,464.60",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-15-2025/"
-  },
-  {
-    "date": "2025-11-12",
-    "numbers": [
-      "10",
-      "13",
-      "16",
-      "36",
-      "5",
-      "12"
-    ],
-    "jackpot": "Php 116,190,560.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-12-2025/"
-  },
-  {
-    "date": "2025-11-10",
-    "numbers": [
-      "53",
-      "48",
-      "24",
-      "36",
-      "39",
-      "7"
-    ],
-    "jackpot": "Php 111,369,858.60",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-10-2025/"
-  },
-  {
-    "date": "2025-11-08",
-    "numbers": [
-      "3",
-      "32",
-      "7",
-      "37",
-      "42",
-      "21"
-    ],
-    "jackpot": "Php 107,428,105.40",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-8-2025/"
-  },
-  {
-    "date": "2025-11-05",
-    "numbers": [
-      "48",
-      "2",
-      "51",
-      "30",
-      "49",
-      "20"
-    ],
-    "jackpot": "Php 102,470,449.40",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-5-2025/"
-  },
-  {
-    "date": "2025-11-03",
-    "numbers": [
-      "42",
-      "41",
-      "21",
-      "5",
-      "45",
-      "11"
-    ],
-    "jackpot": "Php 98,059,716.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-3-2025/"
-  },
-  {
-    "date": "2025-11-01",
-    "numbers": [
-      "50",
-      "12",
-      "27",
-      "7",
-      "47",
-      "5"
-    ],
-    "jackpot": "Php 94,305,937.60",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-1-2025/"
-  },
-  {
-    "date": "2025-10-29",
-    "numbers": [
-      "41",
-      "3",
-      "49",
-      "48",
-      "13",
-      "19"
-    ],
-    "jackpot": "Php 91,000,000,00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-29-2025/"
-  },
-  {
-    "date": "2025-10-27",
-    "numbers": [
-      "14",
-      "39",
-      "42",
-      "35",
-      "25",
-      "30"
-    ],
-    "jackpot": "Php 31,171,824.40",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-27-2025/"
-  },
-  {
-    "date": "2025-10-25",
-    "numbers": [
-      "49",
-      "8",
-      "12",
-      "29",
-      "22",
-      "18"
-    ],
-    "jackpot": "Php 29,700,000.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-25-2025/"
-  },
-  {
-    "date": "2025-10-22",
-    "numbers": [
-      "44",
-      "22",
-      "2",
-      "42",
-      "26",
-      "39"
-    ],
-    "jackpot": "Php 29,700,000.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-22-2025/"
-  },
-  {
-    "date": "2025-10-18",
-    "numbers": [
-      "5",
-      "35",
-      "27",
-      "52",
-      "39",
-      "28"
-    ],
-    "jackpot": "Php 29,700,000.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-18-2025/"
-  },
-  {
-    "date": "2025-10-15",
-    "numbers": [
-      "22",
-      "46",
-      "24",
-      "4",
-      "23",
-      "38"
-    ],
-    "jackpot": "Php 29,700,000.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-15-2025/"
-  },
-  {
-    "date": "2025-10-13",
-    "numbers": [
-      "39",
-      "55",
-      "1",
-      "2",
-      "31",
-      "12"
-    ],
-    "jackpot": "Php 29,700,000.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-13-2025/"
-  },
-  {
-    "date": "2025-10-11",
-    "numbers": [
-      "15",
-      "37",
-      "17",
-      "26",
-      "6",
-      "40"
-    ],
-    "jackpot": "Php 29,700,000.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-11-2025/"
-  },
-  {
-    "date": "2025-10-08",
-    "numbers": [
-      "31",
-      "45",
-      "44",
-      "54",
-      "42",
-      "28"
-    ],
-    "jackpot": "Php 29,700,000.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-8-2025/"
-  },
-  {
-    "date": "2025-10-06",
-    "numbers": [
-      "21",
-      "27",
-      "51",
-      "19",
-      "14",
-      "53"
-    ],
-    "jackpot": "Php 223,580,197.60",
-    "winners": "1",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-6-2025/"
-  },
-  {
-    "date": "2025-10-04",
-    "numbers": [
-      "25",
-      "28",
-      "1",
-      "42",
-      "13",
-      "50"
-    ],
-    "jackpot": "Php 214,989,254.80",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-4-2025/"
-  },
-  {
-    "date": "2025-10-01",
-    "numbers": [
-      "46",
-      "34",
-      "13",
-      "20",
-      "1",
-      "17"
-    ],
-    "jackpot": "Php 205,990,080.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-1-2025/"
-  },
-  {
-    "date": "2025-09-29",
-    "numbers": [
-      "5",
-      "37",
-      "17",
-      "10",
-      "47",
-      "54"
-    ],
-    "jackpot": "Php 197,847,532.40",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-29-2025/"
-  },
-  {
-    "date": "2025-09-27",
-    "numbers": [
-      "2",
-      "21",
-      "32",
-      "37",
-      "45",
-      "30"
-    ],
-    "jackpot": "Php 190,686,140.80",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-27-2025/"
-  },
-  {
-    "date": "2025-09-24",
-    "numbers": [
-      "45",
-      "19",
-      "21",
-      "50",
-      "28",
-      "20"
-    ],
-    "jackpot": "Php 182,743,480.80",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-24-2025/"
-  },
-  {
-    "date": "2025-09-22",
-    "numbers": [
-      "27",
-      "31",
-      "15",
-      "36",
-      "23",
-      "54"
-    ],
-    "jackpot": "Php 175,710,820.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-22-2025/"
-  },
-  {
-    "date": "2025-09-20",
-    "numbers": [
-      "35",
-      "55",
-      "9",
-      "44",
-      "33",
-      "7"
-    ],
-    "jackpot": "Php 169,552,034.40",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-20-2025/"
-  },
-  {
-    "date": "2025-09-17",
-    "numbers": [
-      "41",
-      "44",
-      "40",
-      "9",
-      "26",
-      "49"
-    ],
-    "jackpot": "Php 161,835,217.60",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-17-2025/"
-  },
-  {
-    "date": "2025-09-15",
-    "numbers": [
-      "49",
-      "46",
-      "45",
-      "2",
-      "33",
-      "25"
-    ],
-    "jackpot": "Php 154,670,134.40",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-15-2025/"
-  },
-  {
-    "date": "2025-09-13",
-    "numbers": [
-      "39",
-      "33",
-      "30",
-      "53",
-      "1",
-      "23"
-    ],
-    "jackpot": "Php 147,546,983.20",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-13-2025/"
-  },
-  {
-    "date": "2025-09-10",
-    "numbers": [
-      "52",
-      "50",
-      "8",
-      "45",
-      "4",
-      "48"
-    ],
-    "jackpot": "Php 139,842,746.00",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-10-2025/"
-  },
-  {
-    "date": "2025-09-08",
-    "numbers": [
-      "14",
-      "45",
-      "24",
-      "55",
-      "44",
-      "16"
-    ],
-    "jackpot": "Php 132,998,277.60",
-    "winners": "0",
-    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-8-2025/"
-  },
-  {
     "date": "2022-01-01",
     "numbers": [
       "[Stand by…]"
@@ -8192,5 +7464,1335 @@
     ],
     "jackpot": "Php 126,391,514.80",
     "winners": "0"
+  },
+  {
+    "date": "2025-09-08",
+    "numbers": [
+      "14",
+      "45",
+      "24",
+      "55",
+      "44",
+      "16"
+    ],
+    "jackpot": "Php 132,998,277.60",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-8-2025/"
+  },
+  {
+    "date": "2025-09-10",
+    "numbers": [
+      "52",
+      "50",
+      "8",
+      "45",
+      "4",
+      "48"
+    ],
+    "jackpot": "Php 139,842,746.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-10-2025/"
+  },
+  {
+    "date": "2025-09-13",
+    "numbers": [
+      "39",
+      "33",
+      "30",
+      "53",
+      "1",
+      "23"
+    ],
+    "jackpot": "Php 147,546,983.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-13-2025/"
+  },
+  {
+    "date": "2025-09-15",
+    "numbers": [
+      "49",
+      "46",
+      "45",
+      "2",
+      "33",
+      "25"
+    ],
+    "jackpot": "Php 154,670,134.40",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-15-2025/"
+  },
+  {
+    "date": "2025-09-17",
+    "numbers": [
+      "41",
+      "44",
+      "40",
+      "9",
+      "26",
+      "49"
+    ],
+    "jackpot": "Php 161,835,217.60",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-17-2025/"
+  },
+  {
+    "date": "2025-09-20",
+    "numbers": [
+      "35",
+      "55",
+      "9",
+      "44",
+      "33",
+      "7"
+    ],
+    "jackpot": "Php 169,552,034.40",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-20-2025/"
+  },
+  {
+    "date": "2025-09-22",
+    "numbers": [
+      "27",
+      "31",
+      "15",
+      "36",
+      "23",
+      "54"
+    ],
+    "jackpot": "Php 175,710,820.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-22-2025/"
+  },
+  {
+    "date": "2025-09-24",
+    "numbers": [
+      "45",
+      "19",
+      "21",
+      "50",
+      "28",
+      "20"
+    ],
+    "jackpot": "Php 182,743,480.80",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-24-2025/"
+  },
+  {
+    "date": "2025-09-27",
+    "numbers": [
+      "2",
+      "21",
+      "32",
+      "37",
+      "45",
+      "30"
+    ],
+    "jackpot": "Php 190,686,140.80",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-27-2025/"
+  },
+  {
+    "date": "2025-09-29",
+    "numbers": [
+      "5",
+      "37",
+      "17",
+      "10",
+      "47",
+      "54"
+    ],
+    "jackpot": "Php 197,847,532.40",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-september-29-2025/"
+  },
+  {
+    "date": "2025-10-01",
+    "numbers": [
+      "46",
+      "34",
+      "13",
+      "20",
+      "1",
+      "17"
+    ],
+    "jackpot": "Php 205,990,080.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-1-2025/"
+  },
+  {
+    "date": "2025-10-04",
+    "numbers": [
+      "25",
+      "28",
+      "1",
+      "42",
+      "13",
+      "50"
+    ],
+    "jackpot": "Php 214,989,254.80",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-4-2025/"
+  },
+  {
+    "date": "2025-10-06",
+    "numbers": [
+      "21",
+      "27",
+      "51",
+      "19",
+      "14",
+      "53"
+    ],
+    "jackpot": "Php 223,580,197.60",
+    "winners": "1",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-6-2025/"
+  },
+  {
+    "date": "2025-10-08",
+    "numbers": [
+      "31",
+      "45",
+      "44",
+      "54",
+      "42",
+      "28"
+    ],
+    "jackpot": "Php 29,700,000.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-8-2025/"
+  },
+  {
+    "date": "2025-10-11",
+    "numbers": [
+      "15",
+      "37",
+      "17",
+      "26",
+      "6",
+      "40"
+    ],
+    "jackpot": "Php 29,700,000.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-11-2025/"
+  },
+  {
+    "date": "2025-10-13",
+    "numbers": [
+      "39",
+      "55",
+      "1",
+      "2",
+      "31",
+      "12"
+    ],
+    "jackpot": "Php 29,700,000.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-13-2025/"
+  },
+  {
+    "date": "2025-10-15",
+    "numbers": [
+      "22",
+      "46",
+      "24",
+      "4",
+      "23",
+      "38"
+    ],
+    "jackpot": "Php 29,700,000.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-15-2025/"
+  },
+  {
+    "date": "2025-10-18",
+    "numbers": [
+      "5",
+      "35",
+      "27",
+      "52",
+      "39",
+      "28"
+    ],
+    "jackpot": "Php 29,700,000.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-18-2025/"
+  },
+  {
+    "date": "2025-10-20",
+    "numbers": [
+      50,
+      51,
+      18,
+      12,
+      15,
+      23
+    ],
+    "jackpot": "Php 29,700,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2025-10-22",
+    "numbers": [
+      "44",
+      "22",
+      "2",
+      "42",
+      "26",
+      "39"
+    ],
+    "jackpot": "Php 29,700,000.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-22-2025/"
+  },
+  {
+    "date": "2025-10-25",
+    "numbers": [
+      "49",
+      "8",
+      "12",
+      "29",
+      "22",
+      "18"
+    ],
+    "jackpot": "Php 29,700,000.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-25-2025/"
+  },
+  {
+    "date": "2025-10-27",
+    "numbers": [
+      "14",
+      "39",
+      "42",
+      "35",
+      "25",
+      "30"
+    ],
+    "jackpot": "Php 31,171,824.40",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-27-2025/"
+  },
+  {
+    "date": "2025-10-29",
+    "numbers": [
+      "41",
+      "3",
+      "49",
+      "48",
+      "13",
+      "19"
+    ],
+    "jackpot": "Php 91,000,000,00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-october-29-2025/"
+  },
+  {
+    "date": "2025-11-01",
+    "numbers": [
+      "50",
+      "12",
+      "27",
+      "7",
+      "47",
+      "5"
+    ],
+    "jackpot": "Php 94,305,937.60",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-1-2025/"
+  },
+  {
+    "date": "2025-11-03",
+    "numbers": [
+      "42",
+      "41",
+      "21",
+      "5",
+      "45",
+      "11"
+    ],
+    "jackpot": "Php 98,059,716.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-3-2025/"
+  },
+  {
+    "date": "2025-11-05",
+    "numbers": [
+      "48",
+      "2",
+      "51",
+      "30",
+      "49",
+      "20"
+    ],
+    "jackpot": "Php 102,470,449.40",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-5-2025/"
+  },
+  {
+    "date": "2025-11-08",
+    "numbers": [
+      "3",
+      "32",
+      "7",
+      "37",
+      "42",
+      "21"
+    ],
+    "jackpot": "Php 107,428,105.40",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-8-2025/"
+  },
+  {
+    "date": "2025-11-10",
+    "numbers": [
+      "53",
+      "48",
+      "24",
+      "36",
+      "39",
+      "7"
+    ],
+    "jackpot": "Php 111,369,858.60",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-10-2025/"
+  },
+  {
+    "date": "2025-11-12",
+    "numbers": [
+      "10",
+      "13",
+      "16",
+      "36",
+      "5",
+      "12"
+    ],
+    "jackpot": "Php 116,190,560.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-12-2025/"
+  },
+  {
+    "date": "2025-11-15",
+    "numbers": [
+      "11",
+      "52",
+      "14",
+      "21",
+      "30",
+      "7"
+    ],
+    "jackpot": "Php 122,415,464.60",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-15-2025/"
+  },
+  {
+    "date": "2025-11-17",
+    "numbers": [
+      "5",
+      "44",
+      "40",
+      "12",
+      "50",
+      "22"
+    ],
+    "jackpot": "Php 128,198,961.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-17-2025/"
+  },
+  {
+    "date": "2025-11-19",
+    "numbers": [
+      "28",
+      "50",
+      "32",
+      "12",
+      "8",
+      "38"
+    ],
+    "jackpot": "Php 133,980,882.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-19-2025/"
+  },
+  {
+    "date": "2025-11-22",
+    "numbers": [
+      "3",
+      "40",
+      "11",
+      "53",
+      "39",
+      "26"
+    ],
+    "jackpot": "Php 140,522,916.60",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-22-2025/"
+  },
+  {
+    "date": "2025-11-24",
+    "numbers": [
+      36,
+      43,
+      44,
+      45,
+      11,
+      41
+    ],
+    "jackpot": "Php 146,296,887",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2025-11-26",
+    "numbers": [
+      "24",
+      "42",
+      "33",
+      "19",
+      "6",
+      "20"
+    ],
+    "jackpot": "Php 152,234,211.80",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-26-2025/"
+  },
+  {
+    "date": "2025-11-29",
+    "numbers": [
+      "17",
+      "15",
+      "41",
+      "27",
+      "25",
+      "10"
+    ],
+    "jackpot": "Php 158,846,527.40",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-november-29-2025/"
+  },
+  {
+    "date": "2025-12-01",
+    "numbers": [
+      "38",
+      "41",
+      "42",
+      "2",
+      "5",
+      "49"
+    ],
+    "jackpot": "Php 165,699,861.80",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-1-2025/"
+  },
+  {
+    "date": "2025-12-03",
+    "numbers": [
+      "54",
+      "50",
+      "14",
+      "2",
+      "25",
+      "38"
+    ],
+    "jackpot": "Php 172,931,530.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-3-2025/"
+  },
+  {
+    "date": "2025-12-06",
+    "numbers": [
+      "52",
+      "8",
+      "35",
+      "37",
+      "42",
+      "32"
+    ],
+    "jackpot": "Php 180,675,244.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-6-2025/"
+  },
+  {
+    "date": "2025-12-08",
+    "numbers": [
+      "36",
+      "22",
+      "49",
+      "51",
+      "45",
+      "5"
+    ],
+    "jackpot": "Php 188,122,816.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-8-2025/"
+  },
+  {
+    "date": "2025-12-10",
+    "numbers": [
+      "53",
+      "30",
+      "6",
+      "17",
+      "11",
+      "45"
+    ],
+    "jackpot": "Php 195,803,522.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-10-2025/"
+  },
+  {
+    "date": "2025-12-13",
+    "numbers": [
+      "46",
+      "52",
+      "9",
+      "37",
+      "40",
+      "17"
+    ],
+    "jackpot": "Php 204,170,773.40",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-13-2025/"
+  },
+  {
+    "date": "2025-12-15",
+    "numbers": [
+      "25",
+      "54",
+      "15",
+      "38",
+      "45",
+      "28"
+    ],
+    "jackpot": "Php 212,219,015.80",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-15-2025/"
+  },
+  {
+    "date": "2025-12-17",
+    "numbers": [
+      "14",
+      "8",
+      "1",
+      "51",
+      "39",
+      "48"
+    ],
+    "jackpot": "Php 220,987,758.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-17-2025/"
+  },
+  {
+    "date": "2025-12-20",
+    "numbers": [
+      "5",
+      "45",
+      "3",
+      "35",
+      "49",
+      "42"
+    ],
+    "jackpot": "Php 230,550,309.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-20-2025/"
+  },
+  {
+    "date": "2025-12-22",
+    "numbers": [
+      "53",
+      "38",
+      "23",
+      "1",
+      "10",
+      "18"
+    ],
+    "jackpot": "Php 240,001,724.60",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-22-2025/"
+  },
+  {
+    "date": "2025-12-24",
+    "numbers": [
+      "18",
+      "13",
+      "39",
+      "51",
+      "19",
+      "21"
+    ],
+    "jackpot": "Php 248,525,475.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-24-2025/"
+  },
+  {
+    "date": "2025-12-27",
+    "numbers": [
+      "41",
+      "16",
+      "45",
+      "20",
+      "52",
+      "1"
+    ],
+    "jackpot": "Php 258,798,014.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-27-2025/"
+  },
+  {
+    "date": "2025-12-29",
+    "numbers": [
+      "44",
+      "25",
+      "14",
+      "52",
+      "45",
+      "38"
+    ],
+    "jackpot": "Php 269,216,884.20",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-29-2025/"
+  },
+  {
+    "date": "2025-12-31",
+    "numbers": [
+      "50",
+      "1",
+      "41",
+      "40",
+      "32",
+      "35"
+    ],
+    "jackpot": "Php 278,486.984.60",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-december-31-2025/"
+  },
+  {
+    "date": "2026-01-03",
+    "numbers": [
+      "13",
+      "42",
+      "6",
+      "45",
+      "24",
+      "33"
+    ],
+    "jackpot": "Php 288,616.075.00",
+    "winners": "1",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-january-3-2026/"
+  },
+  {
+    "date": "2026-01-05",
+    "numbers": [
+      "20",
+      "15",
+      "33",
+      "50",
+      "3",
+      "45"
+    ],
+    "jackpot": "Php 29,700,000.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-january-5-2026/"
+  },
+  {
+    "date": "2026-01-07",
+    "numbers": [
+      "34",
+      "41",
+      "44",
+      "37",
+      "38",
+      "19"
+    ],
+    "jackpot": "Php 29,700,000.00",
+    "winners": "0",
+    "source": "https://www.lottopcso.com/grand-lotto-6-55-results-for-january-7-2026/"
+  },
+  {
+    "date": "2026-01-10",
+    "numbers": [
+      32,
+      13,
+      31,
+      8,
+      14,
+      44
+    ],
+    "jackpot": "Php 29,700,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-01-12",
+    "numbers": [
+      47,
+      43,
+      36,
+      9,
+      7,
+      11
+    ],
+    "jackpot": "Php 29,700,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-01-14",
+    "numbers": [
+      2,
+      48,
+      43,
+      41,
+      42,
+      11
+    ],
+    "jackpot": "Php 29,700,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-01-17",
+    "numbers": [
+      40,
+      7,
+      49,
+      19,
+      34,
+      23
+    ],
+    "jackpot": "Php 29,700,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-01-19",
+    "numbers": [
+      28,
+      9,
+      41,
+      22,
+      48,
+      7
+    ],
+    "jackpot": "Php 29,700,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-01-21",
+    "numbers": [
+      34,
+      28,
+      48,
+      25,
+      55,
+      3
+    ],
+    "jackpot": "Php 33,193,409.2",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-01-24",
+    "numbers": [
+      24,
+      19,
+      16,
+      33,
+      36,
+      6
+    ],
+    "jackpot": "Php 37,485,292.6",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-01-26",
+    "numbers": [
+      19,
+      1,
+      37,
+      7,
+      41,
+      51
+    ],
+    "jackpot": "Php 41,941,563.2",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-01-28",
+    "numbers": [
+      13,
+      53,
+      36,
+      11,
+      39,
+      15
+    ],
+    "jackpot": "Php 46,526,553.8",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-01-31",
+    "numbers": [
+      54,
+      37,
+      20,
+      15,
+      21,
+      10
+    ],
+    "jackpot": "Php 51,794,060",
+    "winners": "1",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-02",
+    "numbers": [
+      44,
+      30,
+      17,
+      1,
+      19,
+      50
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-04",
+    "numbers": [
+      45,
+      49,
+      33,
+      43,
+      38,
+      54
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-07",
+    "numbers": [
+      55,
+      2,
+      43,
+      10,
+      14,
+      13
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-09",
+    "numbers": [
+      44,
+      39,
+      47,
+      31,
+      26,
+      2
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-11",
+    "numbers": [
+      3,
+      14,
+      25,
+      13,
+      23,
+      22
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-14",
+    "numbers": [
+      42,
+      41,
+      48,
+      24,
+      22,
+      44
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-16",
+    "numbers": [
+      35,
+      16,
+      54,
+      21,
+      4,
+      6
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-18",
+    "numbers": [
+      14,
+      28,
+      37,
+      41,
+      10,
+      51
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-21",
+    "numbers": [
+      9,
+      23,
+      3,
+      49,
+      50,
+      1
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "2",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-23",
+    "numbers": [
+      20,
+      23,
+      5,
+      35,
+      33,
+      45
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-25",
+    "numbers": [
+      23,
+      17,
+      52,
+      4,
+      34,
+      27
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-02-28",
+    "numbers": [
+      14,
+      51,
+      28,
+      6,
+      27,
+      8
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-02",
+    "numbers": [
+      5,
+      7,
+      18,
+      33,
+      38,
+      27
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-04",
+    "numbers": [
+      33,
+      13,
+      44,
+      50,
+      47,
+      42
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-07",
+    "numbers": [
+      17,
+      44,
+      2,
+      5,
+      28,
+      45
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-09",
+    "numbers": [
+      38,
+      32,
+      8,
+      20,
+      19,
+      9
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "1",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-11",
+    "numbers": [
+      50,
+      24,
+      34,
+      21,
+      45,
+      3
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-14",
+    "numbers": [
+      24,
+      33,
+      48,
+      42,
+      5,
+      22
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-16",
+    "numbers": [
+      42,
+      27,
+      16,
+      54,
+      50,
+      20
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-18",
+    "numbers": [
+      5,
+      6,
+      15,
+      53,
+      17,
+      55
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-21",
+    "numbers": [
+      2,
+      18,
+      47,
+      12,
+      32,
+      11
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-23",
+    "numbers": [
+      43,
+      33,
+      10,
+      26,
+      42,
+      14
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-25",
+    "numbers": [
+      29,
+      25,
+      44,
+      39,
+      13,
+      5
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-28",
+    "numbers": [
+      1,
+      18,
+      51,
+      19,
+      21,
+      5
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-03-30",
+    "numbers": [
+      27,
+      34,
+      31,
+      54,
+      23,
+      3
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-04-01",
+    "numbers": [
+      32,
+      42,
+      17,
+      55,
+      50,
+      19
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-04-06",
+    "numbers": [
+      54,
+      28,
+      47,
+      36,
+      35,
+      29
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-04-08",
+    "numbers": [
+      23,
+      24,
+      9,
+      40,
+      13,
+      17
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-04-11",
+    "numbers": [
+      52,
+      10,
+      50,
+      53,
+      26,
+      28
+    ],
+    "jackpot": "Php 45,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-04-12",
+    "numbers": [
+      52,
+      10,
+      50,
+      53,
+      26,
+      28
+    ],
+    "jackpot": "N/A",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-04-13",
+    "numbers": [
+      51,
+      54,
+      39,
+      50,
+      24,
+      40
+    ],
+    "jackpot": "Php 48,290,931.86",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
+    "date": "2026-04-15",
+    "numbers": [
+      32,
+      43,
+      20,
+      46,
+      9,
+      15
+    ],
+    "jackpot": "Php 51,762,661.04",
+    "winners": "0",
+    "source": "pcsolotto.org API"
   }
 ]
