@@ -1,13 +1,11 @@
 // scripts/update-results.js
 import fs from "fs";
 import path from "path";
-import * as cheerio from "cheerio";
-// import puppeteer from 'puppeteer';
+import axios from "axios";
 
-const BASE_URL = "https://www.lottopcso.com";
 const DATA_DIR = path.join(process.cwd(), "data");
 
-// Lotto games mapping
+// Lotto games mapping - keep your existing JSON files
 const GAME_FILES = {
   "Ultra Lotto 6/58": "ultra-lotto-6-58.json",
   "Grand Lotto 6/55": "grand-lotto-6-55.json",
@@ -24,90 +22,57 @@ function formatDate(date) {
   return date.toISOString().split("T")[0];
 }
 
-// 🟡 Multi-fallback slug mapping
-function mapGameToFallbackUrls(game) {
-  switch (game) {
-    case "Ultra Lotto 6/58":
-      return ["6-58-ultra-lotto", "6-58"];
-    case "Grand Lotto 6/55":
-      return ["6-55-grand-lotto", "6-55"];
-    case "Super Lotto 6/49":
-      return ["6-49-super-lotto", "6-49"];
-    case "Mega Lotto 6/45":
-      return ["6-45-mega-lotto", "6-45"];
-    case "Lotto 6/42":
-      return ["6-42-lotto", "6-42"];
-    default:
-      throw new Error("Unknown game: " + game);
-  }
-}
+// Game code mapping for pcsolotto.org API
+const GAME_CODE_MAP = {
+  "Ultra Lotto 6/58": "ultra_lotto_6_58",
+  "Grand Lotto 6/55": "grand_lotto_6_55",
+  "Super Lotto 6/49": "super_lotto_6_49",
+  "Mega Lotto 6/45": "mega_lotto_6_45",
+  "Lotto 6/42":     "lotto_6_42"
+};
 
-// Primary URL
-function buildPrimaryUrl(game, dateObj) {
-  const month = dateObj.toLocaleString("en-US", { month: "long" }).toLowerCase();
-  const day = dateObj.getDate();
-  const year = dateObj.getFullYear();
-  const formattedGame = game.replace(/\s+/g, "-").replace("/", "-").toLowerCase();
-  return `${BASE_URL}/${formattedGame}-results-for-${month}-${day}-${year}/`;
-}
-
-// Fallback URLs (plural)
-function buildFallbackUrls(game, dateObj) {
-  const month = dateObj.toLocaleString("en-US", { month: "long" }).toLowerCase();
-  const day = dateObj.getDate();
-  const year = dateObj.getFullYear();
-  return mapGameToFallbackUrls(game).map(
-    slug => `${BASE_URL}/${slug}-lotto-results-for-${month}-${day}-${year}/`
-  );
-}
-
-// New API-based fetch function (replaces scrapeResult)
+// Fetch result from stable public PCSO API
 async function fetchResult(game, targetDateObj) {
-  const todayStr = formatDate(targetDateObj);
+  const targetDateStr = formatDate(targetDateObj);
   try {
     const response = await axios.get("https://pcsolotto.org/api/v2/results", {
-      params: { date: todayStr },
-      timeout: 15000
+      params: { date: targetDateStr },
+      timeout: 20000
     });
 
     const data = response.data;
-    const draws = data.draws || data.data || [];
+    const draws = data.draws || [];
 
-    const gameCodeMap = {
-      "Ultra Lotto 6/58": "ultra_lotto_6_58",
-      "Grand Lotto 6/55": "grand_lotto_6_55",
-      "Super Lotto 6/49": "super_lotto_6_49",
-      "Mega Lotto 6/45": "mega_lotto_6_45",
-      "Lotto 6/42":     "lotto_6_42"
-    };
+    const gameCode = GAME_CODE_MAP[game];
 
     for (const draw of draws) {
       const gameResult = draw.games?.find(g => 
-        g.gameCode === gameCodeMap[game] || 
+        g.gameCode === gameCode || 
         g.gameName?.toLowerCase().includes(game.toLowerCase().replace(/\s+/g, ""))
       );
 
       if (gameResult && gameResult.numbers && gameResult.numbers.length > 0) {
         return {
-          date: draw.drawDate ? draw.drawDate.split("T")[0] : todayStr,
+          date: draw.drawDate || targetDateStr,
           numbers: gameResult.numbers,
           jackpot: gameResult.prizeAmount 
             ? `Php ${Number(gameResult.prizeAmount).toLocaleString()}` 
             : "N/A",
-          winners: (gameResult.winnersCount || 0).toString(),
+          winners: (gameResult.winnersCount ?? 0).toString(),
           source: "pcsolotto.org API"
         };
       }
     }
-    console.warn(`[WARN] No data found for ${game} on ${todayStr} in API response`);
+
+    console.warn(`[WARN] No matching result for ${game} on ${targetDateStr}`);
     return null;
   } catch (err) {
-    console.error(`[ERROR] API request failed for ${game}: ${err.message}`);
+    console.error(`[ERROR] API request failed for ${game} on ${targetDateStr}: ${err.message}`);
     return null;
   }
 }
 
-// Main updater (only small changes in the loops)
+// Main updater
 async function updateAllGames() {
   const today = TARGET_DATE ? new Date(TARGET_DATE) : new Date();
   if (TARGET_DATE && isNaN(today)) {
@@ -122,7 +87,7 @@ async function updateAllGames() {
       results = JSON.parse(fs.readFileSync(filePath, "utf-8"));
     }
 
-    // 🟠 WINNERS-ONLY PATCH MODE (kept almost identical)
+    // 🟠 WINNERS-ONLY PATCH MODE
     if (WINNERS_ONLY) {
       let updated = false;
       for (let i = 0; i < Math.min(results.length, 7); i++) {
