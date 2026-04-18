@@ -40,24 +40,40 @@ async function fetchResult(game, targetDateObj) {
       timeout: 20000
     });
 
+    console.log(`[DEBUG] API response received for ${targetDateStr}`);
+
     const data = response.data;
-    const draws = data.draws || [];
+    const draws = data.draws || data.results || data.data || [];
+
+    if (draws.length === 0) {
+      console.warn(`[WARN] API returned no draws for ${targetDateStr}`);
+      return null;
+    }
 
     const gameCode = GAME_CODE_MAP[game];
+    const gameNameLower = game.toLowerCase().replace(/\s+/g, "");
 
     for (const draw of draws) {
-      const gameResult = draw.games?.find(g => 
-        g.gameCode === gameCode || 
-        g.gameName?.toLowerCase().includes(game.toLowerCase().replace(/\s+/g, ""))
-      );
+      const gamesList = draw.games || draw.results || [];
+
+      const gameResult = gamesList.find(g => {
+        if (!g) return false;
+        return (
+          g.gameCode === gameCode ||
+          (g.gameName && g.gameName.toLowerCase().includes(gameNameLower)) ||
+          (g.game && g.game.toLowerCase().includes(gameNameLower))
+        );
+      });
 
       if (gameResult && gameResult.numbers && gameResult.numbers.length > 0) {
+        console.log(`[DEBUG] Found match for ${game} on ${targetDateStr}`);
+
         return {
-          date: draw.drawDate || targetDateStr,
+          date: draw.drawDate ? draw.drawDate.split("T")[0] : targetDateStr,
           numbers: gameResult.numbers,
           jackpot: gameResult.prizeAmount 
             ? `Php ${Number(gameResult.prizeAmount).toLocaleString()}` 
-            : "N/A",
+            : (gameResult.jackpotAmount ? `Php ${Number(gameResult.jackpotAmount).toLocaleString()}` : "N/A"),
           winners: gameResult.winnersCount != null 
             ? gameResult.winnersCount.toString() 
             : "0",
@@ -66,7 +82,7 @@ async function fetchResult(game, targetDateObj) {
       }
     }
 
-    console.warn(`[WARN] No matching result for ${game} on ${targetDateStr}`);
+    console.warn(`[WARN] No matching game found for ${game} on ${targetDateStr}`);
     return null;
   } catch (err) {
     console.error(`[ERROR] API request failed for ${game} on ${targetDateStr}: ${err.message}`);
