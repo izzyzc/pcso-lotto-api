@@ -1,7 +1,18 @@
 name: Fetch Lotto History
 
 on:
-  workflow_dispatch:   # 👈 allows manual trigger from GitHub Actions tab
+  workflow_dispatch:
+    inputs:
+      fromYear:
+        description: 'From Year (e.g. 2022)'
+        required: true
+        default: '2022'
+        type: string
+      toYear:
+        description: 'To Year (e.g. 2026)'
+        required: true
+        default: '2026'
+        type: string
 
 permissions:
   contents: write
@@ -12,28 +23,30 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          persist-credentials: true   # 👈 keep GITHUB_TOKEN so we can push
-
+          persist-credentials: true
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Install dependencies
-        run: |
-          npm install axios cheerio
+        run: npm install
 
       - name: Run history scraper
-        run: node scripts/fetch-history.js
+        run: node scripts/fetch-history.js ${{ github.event.inputs.fromYear }} ${{ github.event.inputs.toYear }}
 
       - name: Commit and push results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/*.json
-          git commit -m "Add historical lotto results" || echo "No changes to commit"
-          git pull --rebase --autostash origin main
+          if git diff --cached --quiet; then
+            echo "ℹ️ No changes to commit"
+            exit 0
+          fi
+          git commit -m "📜 Update historical lotto results (${{ github.event.inputs.fromYear }}-${{ github.event.inputs.toYear }})"
+          git pull --rebase --autostash origin ${{ github.ref_name }}
           git push
