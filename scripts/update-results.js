@@ -2,7 +2,7 @@
 import fs from "fs";
 import path from "path";
 import * as cheerio from "cheerio";
-import puppeteer from 'puppeteer';
+// import puppeteer from 'puppeteer';
 
 const BASE_URL = "https://www.lottopcso.com";
 const DATA_DIR = path.join(process.cwd(), "data");
