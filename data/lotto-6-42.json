@@ -1,5 +1,17 @@
 [
   {
+    "date": "2026-06-05",
+    "numbers": [
+      2,
+      7,
+      9,
+      5
+    ],
+    "jackpot": "N/A",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
     "date": "2026-06-04",
     "numbers": [
       2,
