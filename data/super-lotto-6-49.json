@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-09",
+    "numbers": [
+      43,
+      22,
+      15,
+      4,
+      3,
+      17
+    ],
+    "jackpot": "Php 25,000,000",
+    "winners": "0",
+    "source": "pcsolotto.org API"
+  },
+  {
     "date": "2026-06-07",
     "numbers": [
       41,
