@@ -35,7 +35,7 @@ async function fetchGameResults(game) {
   const code = GAME_CODE_MAP[game];
   if (!code) return [];
 
-  const url = `https://lottomatik.com/api/get-game-history`;
+  const url = `https://lottomatik.com/api/backend/get-game-history`;
 
   try {
     const response = await axios.get(url, {
