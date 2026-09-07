@@ -23,11 +23,29 @@ const GAME_CODE_MAP = {
 };
 
 const WINNERS_ONLY = process.env.WINNERS_ONLY === "true";
-const TARGET_DATE = process.env.TARGET_DATE || null;
+const START_DATE_ENV = process.env.START_DATE || null;
+const END_DATE_ENV = process.env.END_DATE || null;
 
 // Utility: format Date object to YYYY-MM-DD
 function formatDate(date) {
   return date.toISOString().split("T")[0];
+}
+
+// Utility: Generate array of YYYY-MM-DD dates between start and end inclusive
+function getDateRange(startDateStr, endDateStr) {
+  const dates = [];
+  let current = new Date(startDateStr);
+  const end = new Date(endDateStr);
+
+  if (isNaN(current.getTime()) || isNaN(end.getTime())) {
+    throw new Error("Invalid date format provided for range. Use YYYY-MM-DD");
+  }
+
+  while (current <= end) {
+    dates.push(formatDate(current));
+    current.setDate(current.getDate() + 1);
+  }
+  return dates;
 }
 
 // Fetch results directly from LottoMatik API endpoint
@@ -51,16 +69,13 @@ async function fetchGameResults(game) {
     const items = response.data?.items || [];
 
     return items.map(item => {
-      // Format winning numbers to 2-digit strings
       const numbers = (item.result || []).map(n => String(n).padStart(2, "0"));
 
-      // Format jackpot amount
       const jackpotVal = Number(item.jackpot);
       const jackpot = !isNaN(jackpotVal)
         ? `Php ${jackpotVal.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
         : "N/A";
 
-      // Format winner count
       const winners = item.totalWinners != null ? String(item.totalWinners) : "0";
 
       return {
@@ -80,11 +95,17 @@ async function fetchGameResults(game) {
 
 // Main updater logic
 async function updateAllGames() {
-  const today = TARGET_DATE ? new Date(TARGET_DATE) : new Date();
-  if (TARGET_DATE && isNaN(today)) {
-    throw new Error("Invalid TARGET_DATE format. Use YYYY-MM-DD");
+  const todayStr = formatDate(new Date());
+
+  let targetDates = [];
+  if (START_DATE_ENV) {
+    const endStr = END_DATE_ENV || START_DATE_ENV;
+    targetDates = getDateRange(START_DATE_ENV, endStr);
+  } else {
+    targetDates = [todayStr];
   }
-  const todayStr = formatDate(today);
+
+  console.log(`[INFO] Processing dates: ${targetDates.join(", ")}`);
 
   for (const [game, fileName] of Object.entries(GAME_FILES)) {
     const filePath = path.join(DATA_DIR, fileName);
@@ -105,7 +126,7 @@ async function updateAllGames() {
     // 🟠 WINNERS-ONLY PATCH MODE
     if (WINNERS_ONLY) {
       let updated = false;
-      for (let i = 0; i < Math.min(existingResults.length, 7); i++) {
+      for (let i = 0; i < Math.min(existingResults.length, 30); i++) {
         const entry = existingResults[i];
         if (!entry.winners || entry.winners === "*" || entry.winners === "0") {
           const matchedFresh = freshData.find(f => f.date === entry.date);
@@ -122,20 +143,30 @@ async function updateAllGames() {
       continue;
     }
 
-    // 🟢 NORMAL NIGHTLY MODE
-    const targetMatch = freshData.find(r => r.date === todayStr);
+    // 🟢 NORMAL / BACKFILL MODE
+    let fileModified = false;
 
-    if (targetMatch) {
-      const exists = existingResults.some(r => r.date === todayStr);
-      if (exists) {
-        console.log(`⏭️ Already have ${game} for ${todayStr}`);
+    for (const targetDateStr of targetDates) {
+      const targetMatch = freshData.find(r => r.date === targetDateStr);
+
+      if (targetMatch) {
+        const exists = existingResults.some(r => r.date === targetDateStr);
+        if (exists) {
+          console.log(`⏭️ Already have ${game} for ${targetDateStr}`);
+        } else {
+          existingResults.push(targetMatch);
+          fileModified = true;
+          console.log(`✅ Added ${game} for ${targetDateStr}`);
+        }
       } else {
-        existingResults.unshift(targetMatch);
-        fs.writeFileSync(filePath, JSON.stringify(existingResults, null, 2));
-        console.log(`✅ Added ${game} for ${todayStr} from ${targetMatch.source}`);
+        console.log(`❌ No draw result found for ${game} on ${targetDateStr}`);
       }
-    } else {
-      console.log(`❌ No result found for ${game} on ${todayStr}`);
+    }
+
+    if (fileModified) {
+      // Sort in descending order by date (newest first)
+      existingResults.sort((a, b) => new Date(b.date) - new Date(a.date));
+      fs.writeFileSync(filePath, JSON.stringify(existingResults, null, 2));
     }
   }
 }
