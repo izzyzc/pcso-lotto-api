@@ -19,7 +19,7 @@ const GAME_CODE_MAP = {
   "Grand Lotto 6/55": "GL55",
   "Super Lotto 6/49": "SL49",
   "Mega Lotto 6/45": "ML45",
-  "Lotto 6/42": "L42"
+  "Lotto 6/42": "LOTTO42"
 };
 
 const WINNERS_ONLY = process.env.WINNERS_ONLY === "true";
