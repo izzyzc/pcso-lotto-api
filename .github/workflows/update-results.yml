@@ -2,7 +2,7 @@ name: Update Lotto Results
 
 on:
   schedule:
-    - cron: "22 13 * * *"   # 🟢 9:30 PM PH time
+    - cron: "37 13 * * *"   # 🟢 9:37 PM PH time
     - cron: "0 0 * * *"     # 🟠 8:00 AM PH time (winners patch)
   workflow_dispatch:
     inputs:
