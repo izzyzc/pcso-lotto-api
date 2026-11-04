@@ -14,6 +14,90 @@
     "source": "lottomatik.com API"
   },
   {
+    "date": "2026-10-30",
+    "numbers": [
+      "09",
+      "37",
+      "34",
+      "18",
+      "27",
+      "44"
+    ],
+    "jackpot": "Php 15,000,000.00",
+    "winners": "0",
+    "source": "lottomatik.com Monthly Archive"
+  },
+  {
+    "date": "2026-10-28",
+    "numbers": [
+      "19",
+      "40",
+      "37",
+      "01",
+      "14",
+      "29"
+    ],
+    "jackpot": "Php 15,000,000.00",
+    "winners": "0",
+    "source": "lottomatik.com Monthly Archive"
+  },
+  {
+    "date": "2026-10-26",
+    "numbers": [
+      "06",
+      "34",
+      "45",
+      "36",
+      "30",
+      "16"
+    ],
+    "jackpot": "Php 15,000,000.00",
+    "winners": "0",
+    "source": "lottomatik.com Monthly Archive"
+  },
+  {
+    "date": "2026-10-23",
+    "numbers": [
+      "01",
+      "02",
+      "25",
+      "07",
+      "19",
+      "03"
+    ],
+    "jackpot": "Php 15,000,000.00",
+    "winners": "3",
+    "source": "lottomatik.com Monthly Archive"
+  },
+  {
+    "date": "2026-10-21",
+    "numbers": [
+      "09",
+      "43",
+      "40",
+      "03",
+      "07",
+      "31"
+    ],
+    "jackpot": "Php 15,000,000.00",
+    "winners": "0",
+    "source": "lottomatik.com Monthly Archive"
+  },
+  {
+    "date": "2026-10-19",
+    "numbers": [
+      "16",
+      "03",
+      "24",
+      "34",
+      "41",
+      "31"
+    ],
+    "jackpot": "Php 15,000,000.00",
+    "winners": "0",
+    "source": "lottomatik.com Monthly Archive"
+  },
+  {
     "date": "2026-10-16",
     "numbers": [
       "08",
@@ -24,7 +108,7 @@
       "27"
     ],
     "jackpot": "Php 110,527,091.63",
-    "winners": "0",
+    "winners": "1",
     "source": "lottomatik.com API"
   },
   {
