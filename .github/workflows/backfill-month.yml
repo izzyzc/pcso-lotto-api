@@ -44,6 +44,6 @@ jobs:
             echo "ℹ️ No changes to commit"
             exit 0
           fi
-          git commit -m "📅 Backfilled monthly results for ${{ github.event.inputs.year }}-${${ github.event.inputs.month }}"
+          git commit -m "📅 Backfilled monthly results for ${{ github.event.inputs.year }}-${{ github.event.inputs.month }}"
           git pull --rebase --autostash origin ${{ github.ref_name }}
           git push
