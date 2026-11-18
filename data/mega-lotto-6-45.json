@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-11-18",
+    "numbers": [
+      "11",
+      "18",
+      "45",
+      "04",
+      "14",
+      "08"
+    ],
+    "jackpot": "Php 26,266,796.56",
+    "winners": "0",
+    "source": "lottomatik.com API"
+  },
+  {
     "date": "2026-11-16",
     "numbers": [
       "13",
